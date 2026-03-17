@@ -13,3 +13,4 @@ Modern restaurant website.
 <img width="1053" height="797" alt="image" src="https://github.com/user-attachments/assets/098f4e03-889c-46f6-b209-df6e97cbc29d" />
 <img width="1161" height="795" alt="image" src="https://github.com/user-attachments/assets/1b694d85-8b53-4b73-a65b-94e7113449a0" />
 <img width="1215" height="809" alt="image" src="https://github.com/user-attachments/assets/56ba7be6-2a25-4d06-9887-b0a620eb88da" />
+<img width="1569" height="547" alt="image" src="https://github.com/user-attachments/assets/cb84d786-f789-409c-9123-a50a9ae68c4d" />
