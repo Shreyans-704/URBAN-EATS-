@@ -1,0 +1,61 @@
+/* Global App Styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Great+Vibes&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:host {
+  display: block;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b8860b;
+}
+
+/* Selection color */
+::selection {
+  background: #d4af37;
+  color: #0a0a0a;
+}
+
+::-moz-selection {
+  background: #d4af37;
+  color: #0a0a0a;
+}
+
+/* Button hover effects */
+button, a[role="button"] {
+  cursor: pointer;
+}
+
+/* Input styling */
+input, textarea, select {
+  font-family: 'Inter', sans-serif;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+}

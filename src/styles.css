@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes float {
+  0%, 100% {
+    transform: rotateX(8deg) rotateY(-12deg) rotateZ(4deg) translateZ(50px) translateY(0px);
+  }
+  50% {
+    transform: rotateX(8deg) rotateY(-12deg) rotateZ(4deg) translateZ(50px) translateY(-20px);
+  }
+}
