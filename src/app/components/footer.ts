@@ -95,7 +95,7 @@ import { RouterModule } from '@angular/router';
 
           <!-- Copyright -->
           <div (click)="scrollToTop()" class="text-center text-white/40 text-xs cursor-pointer hover:text-white/60 transition-colors">
-            <p>&copy; 2024 Urban Eats Restaurant. All rights reserved. | Crafted with excellence</p>
+            <p>&copy; 2026 Urban Eats Restaurant. All rights reserved. | Crafted with excellence</p>
           </div>
         </div>
       </div>
