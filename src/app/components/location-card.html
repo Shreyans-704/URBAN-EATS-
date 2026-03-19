@@ -1,0 +1,60 @@
+<!-- Location Card Container -->
+<div class="location-card-container">
+  <!-- Card Header -->
+  <div class="location-card-header">
+    <h2 class="location-card-title">📍 Location</h2>
+  </div>
+
+  <!-- Card Content -->
+  <div class="location-card-content">
+    <!-- Left Section: Address Information -->
+    <div class="location-info-section">
+      <div class="address-block">
+        <h3 class="address-title">{{ restaurantName }}</h3>
+        <p class="address-text">{{ address }}</p>
+        
+        <!-- Contact Info -->
+        <div class="contact-info">
+          <div class="contact-item">
+            <span class="contact-icon">📞</span>
+            <span class="contact-text">+1 (555) 123-4567</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">🕐</span>
+            <span class="contact-text">Mon-Sun: 5:00 PM - 12:00 AM</span>
+          </div>
+        </div>
+
+        <!-- Get Directions Button -->
+        <button (click)="openGoogleMaps()" class="get-directions-btn">
+          <span class="btn-icon">🗺️</span>
+          Get Directions
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Section: Map Preview -->
+    <div class="map-preview-section">
+      <!-- Map Container with Click Handler -->
+      <div class="map-container" (click)="openMapsSearch()" title="Click to open in Google Maps">
+        <!-- Static Map Image -->
+        <img 
+          [src]="staticMapUrl" 
+          alt="Restaurant Location Map"
+          class="map-image"
+          onerror="this.src='https://via.placeholder.com/400x300?text=Map+Unavailable'"
+        />
+        
+        <!-- Location Pin Overlay (fallback when API key is not set) -->
+        <div class="location-pin-overlay">
+          <div class="pin-icon">📍</div>
+        </div>
+
+        <!-- Click Indicator -->
+        <div class="map-click-indicator">
+          <span>Click to open map</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

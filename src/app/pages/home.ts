@@ -1,11 +1,12 @@
 import { Component, HostListener, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { LocationCardComponent } from '../components/location-card';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, LocationCardComponent],
   template: `
     <!-- Hero Section -->
     <section class="relative min-h-screen bg-gradient-luxury flex items-center overflow-hidden pt-20">
@@ -501,6 +502,18 @@ import { RouterModule } from '@angular/router';
           scrollbar-color: #d4af37 #f5f5f5;
         }
       </style>
+    </section>
+
+    <!-- Location Card Section -->
+    <section class="relative bg-gradient-luxury py-20 lg:py-32">
+      <div class="max-w-4xl mx-auto px-6">
+        <app-location-card
+          [address]="'Snigdha Shelters, 74-5-1, TTD Rd, opposite Vydurya Residency, Prakasam Nagar, Rajamahendravaram, Andhra Pradesh 533103, India'"
+          [latitude]="17.3730"
+          [longitude]="81.7852"
+          [restaurantName]="'Urban Eats'"
+        ></app-location-card>
+      </div>
     </section>
 
     <!-- Booking Section -->

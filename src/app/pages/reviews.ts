@@ -38,9 +38,9 @@ import { Component } from '@angular/core';
 
         <div class="text-center mt-16 bg-luxury-dark p-12 rounded-lg border border-luxury-gold/20">
           <p class="text-white/60 text-lg mb-6">Share your experience with us</p>
-          <button class="px-8 py-3 border border-luxury-gold text-luxury-gold hover:bg-luxury-gold hover:text-black transition-all duration-300 font-serif font-bold uppercase tracking-wider">
+          <a routerLink="/contact" class="inline-block px-8 py-3 border border-luxury-gold text-luxury-gold hover:bg-luxury-gold hover:text-black transition-all duration-300 font-serif font-bold uppercase tracking-wider">
             Write a Review
-          </button>
+          </a>
         </div>
       </div>
     </div>

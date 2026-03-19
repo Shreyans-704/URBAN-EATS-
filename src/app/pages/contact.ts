@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [FormsModule],
+  imports: [CommonModule, FormsModule],
   template: `
     <div class="min-h-screen bg-gradient-luxury pt-24">
       <div class="max-w-6xl mx-auto px-6 py-20">
@@ -52,38 +53,109 @@ import { FormsModule } from '@angular/forms';
             </div>
           </div>
 
-          <!-- Contact Form -->
+          <!-- Form Section -->
           <div class="lg:col-span-2 bg-luxury-dark p-10 rounded-lg border border-luxury-gold/20">
-            <form class="space-y-6">
-              <!-- Name -->
-              <div>
-                <label class="block text-white font-serif font-semibold mb-2">Name</label>
-                <input type="text" placeholder="Your full name" class="w-full px-4 py-3 bg-black border border-luxury-gold/30 text-white placeholder-white/40 focus:outline-none focus:border-luxury-gold transition-colors" />
-              </div>
-
-              <!-- Email -->
-              <div>
-                <label class="block text-white font-serif font-semibold mb-2">Email</label>
-                <input type="email" placeholder="your&#64;email.com" class="w-full px-4 py-3 bg-black border border-luxury-gold/30 text-white placeholder-white/40 focus:outline-none focus:border-luxury-gold transition-colors" />
-              </div>
-
-              <!-- Subject -->
-              <div>
-                <label class="block text-white font-serif font-semibold mb-2">Subject</label>
-                <input type="text" placeholder="How can we help?" class="w-full px-4 py-3 bg-black border border-luxury-gold/30 text-white placeholder-white/40 focus:outline-none focus:border-luxury-gold transition-colors" />
-              </div>
-
-              <!-- Message -->
-              <div>
-                <label class="block text-white font-serif font-semibold mb-2">Message</label>
-                <textarea rows="6" placeholder="Tell us about your inquiry..." class="w-full px-4 py-3 bg-black border border-luxury-gold/30 text-white placeholder-white/40 focus:outline-none focus:border-luxury-gold transition-colors"></textarea>
-              </div>
-
-              <!-- Submit Button -->
-              <button type="submit" class="w-full py-4 bg-luxury-gold text-black font-serif font-bold uppercase tracking-wider hover:bg-luxury-bronze transition-all duration-300 shadow-luxury">
+            <!-- Form Tabs -->
+            <div class="flex gap-4 mb-8 border-b border-luxury-gold/20">
+              <button 
+                type="button"
+                (click)="activeTab = 'message'"
+                [class.active-tab]="activeTab === 'message'"
+                class="pb-3 px-4 font-serif font-semibold uppercase tracking-wider transition-all duration-300"
+                [ngClass]="{'text-luxury-gold': activeTab === 'message', 'text-white/60': activeTab !== 'message'}">
                 Send Message
               </button>
-            </form>
+              <button 
+                type="button"
+                (click)="activeTab = 'review'"
+                [class.active-tab]="activeTab === 'review'"
+                class="pb-3 px-4 font-serif font-semibold uppercase tracking-wider transition-all duration-300"
+                [ngClass]="{'text-luxury-gold': activeTab === 'review', 'text-white/60': activeTab !== 'review'}">
+                Write Review
+              </button>
+            </div>
+
+            <!-- Contact Form -->
+            <div *ngIf="activeTab === 'message'">
+              <!-- Success Message -->
+              <div *ngIf="messageSubmitted" class="mb-6 p-4 bg-green-900/30 border border-green-500 rounded-lg">
+                <p class="text-green-400 font-semibold">✓ Thank you! Your message has been sent successfully. We'll get back to you soon!</p>
+              </div>
+              <form class="space-y-6" (ngSubmit)="onSubmitMessage()">
+                <!-- Name -->
+                <div>
+                  <label class="block text-white font-serif font-semibold mb-2">Name</label>
+                  <input type="text" [(ngModel)]="messageForm.name" name="message_name" placeholder="Your full name" class="w-full px-4 py-3 bg-black border border-luxury-gold/30 text-white placeholder-white/40 focus:outline-none focus:border-luxury-gold transition-colors rounded" />
+                </div>
+
+                <!-- Email -->
+                <div>
+                  <label class="block text-white font-serif font-semibold mb-2">Email</label>
+                  <input type="email" [(ngModel)]="messageForm.email" name="message_email" placeholder="your@email.com" class="w-full px-4 py-3 bg-black border border-luxury-gold/30 text-white placeholder-white/40 focus:outline-none focus:border-luxury-gold transition-colors rounded" />
+                </div>
+
+                <!-- Subject -->
+                <div>
+                  <label class="block text-white font-serif font-semibold mb-2">Subject</label>
+                  <input type="text" [(ngModel)]="messageForm.subject" name="message_subject" placeholder="How can we help?" class="w-full px-4 py-3 bg-black border border-luxury-gold/30 text-white placeholder-white/40 focus:outline-none focus:border-luxury-gold transition-colors rounded" />
+                </div>
+
+                <!-- Message -->
+                <div>
+                  <label class="block text-white font-serif font-semibold mb-2">Message</label>
+                  <textarea [(ngModel)]="messageForm.message" name="message_text" rows="6" placeholder="Tell us about your inquiry..." class="w-full px-4 py-3 bg-black border border-luxury-gold/30 text-white placeholder-white/40 focus:outline-none focus:border-luxury-gold transition-colors rounded"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="button" (click)="onSubmitMessage()" class="w-full py-4 bg-luxury-gold text-black font-serif font-bold uppercase tracking-wider hover:bg-luxury-bronze transition-all duration-300 shadow-luxury rounded">
+                  <span *ngIf="!messageSubmitted">Send Message</span>
+                  <span *ngIf="messageSubmitted">Message Sent!</span>
+                </button>
+              </form>
+            </div>
+
+            <!-- Review Form -->
+            <div *ngIf="activeTab === 'review'">
+              <!-- Success Message -->
+              <div *ngIf="reviewSubmitted" class="mb-6 p-4 bg-green-900/30 border border-green-500 rounded-lg">
+                <p class="text-green-400 font-semibold">✓ Thank you for your review! We appreciate your feedback.</p>
+              </div>
+              <form class="space-y-6" (ngSubmit)="onSubmitReview()">
+                <!-- Name -->
+                <div>
+                  <label class="block text-white font-serif font-semibold mb-2">Your Name</label>
+                  <input type="text" [(ngModel)]="reviewForm.name" name="review_name" placeholder="Enter your name" class="w-full px-4 py-3 bg-black border border-luxury-gold/30 text-white placeholder-white/40 focus:outline-none focus:border-luxury-gold transition-colors rounded" />
+                </div>
+
+                <!-- Email -->
+                <div>
+                  <label class="block text-white font-serif font-semibold mb-2">Email</label>
+                  <input type="email" [(ngModel)]="reviewForm.email" name="review_email" placeholder="your@email.com" class="w-full px-4 py-3 bg-black border border-luxury-gold/30 text-white placeholder-white/40 focus:outline-none focus:border-luxury-gold transition-colors rounded" />
+                </div>
+
+                <!-- Rating -->
+                <div>
+                  <label class="block text-white font-serif font-semibold mb-3">Rating</label>
+                  <div class="flex gap-2">
+                    <button *ngFor="let star of [1, 2, 3, 4, 5]" type="button" (click)="reviewForm.rating = star" class="text-4xl transition-all hover:scale-110" [ngClass]="{'text-luxury-gold': reviewForm.rating >= star, 'text-white/30': reviewForm.rating < star}">
+                      ★
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Review Text -->
+                <div>
+                  <label class="block text-white font-serif font-semibold mb-2">Your Review</label>
+                  <textarea [(ngModel)]="reviewForm.review" name="review_text" rows="6" placeholder="Tell us about your experience..." class="w-full px-4 py-3 bg-black border border-luxury-gold/30 text-white placeholder-white/40 focus:outline-none focus:border-luxury-gold transition-colors rounded"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="button" (click)="onSubmitReview()" class="w-full py-4 bg-luxury-gold text-black font-serif font-bold uppercase tracking-wider hover:bg-luxury-bronze transition-all duration-300 shadow-luxury rounded">
+                  <span *ngIf="!reviewSubmitted">Submit Review</span>
+                  <span *ngIf="reviewSubmitted">Review Submitted!</span>
+                </button>
+              </form>
+            </div>
           </div>
         </div>
 
@@ -98,7 +170,61 @@ import { FormsModule } from '@angular/forms';
           </div>
         </div>
       </div>
+
+      <style>
+        .active-tab {
+          border-b: 3px solid #d4af37;
+        }
+      </style>
     </div>
   `
 })
-export class ContactPage {}
+export class ContactPage {
+  activeTab: 'message' | 'review' = 'message';
+  messageSubmitted = false;
+  reviewSubmitted = false;
+
+  messageForm = {
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  };
+
+  reviewForm = {
+    name: '',
+    email: '',
+    rating: 5,
+    review: ''
+  };
+
+  onSubmitMessage() {
+    if (this.messageForm.name && this.messageForm.email && this.messageForm.subject && this.messageForm.message) {
+      this.messageSubmitted = true;
+      setTimeout(() => {
+        this.messageForm = {
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        };
+        this.messageSubmitted = false;
+      }, 3000);
+    }
+  }
+
+  onSubmitReview() {
+    if (this.reviewForm.name && this.reviewForm.email && this.reviewForm.review) {
+      this.reviewSubmitted = true;
+      setTimeout(() => {
+        this.reviewForm = {
+          name: '',
+          email: '',
+          rating: 5,
+          review: ''
+        };
+        this.reviewSubmitted = false;
+      }, 3000);
+    }
+  }
+}
